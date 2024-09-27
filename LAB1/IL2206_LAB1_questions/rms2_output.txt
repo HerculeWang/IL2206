@@ -1,0 +1,31 @@
+Task 1- Release:  0.100, Completion:  0.243, Response: 0.143, WCRT: 0.143, Next Release:  0.400
+Task 2- Release:  0.100, Completion:  0.383, Response: 0.283, WCRT: 0.283, Next Release:  0.500
+Task 1- Release:  0.400, Completion:  0.552, Response: 0.152, WCRT: 0.152, Next Release:  0.700
+Task 2- Release:  0.500, Completion:  0.689, Response: 0.189, WCRT: 0.283, Next Release:  0.900
+Task 1- Release:  0.700, Completion:  0.839, Response: 0.139, WCRT: 0.152, Next Release:  1.000
+Task 1- Release:  1.000, Completion:  1.149, Response: 0.149, WCRT: 0.152, Next Release:  1.300
+Task 2- Release:  0.900, Completion:  1.192, Response: 0.292, WCRT: 0.292, Next Release:  1.300
+Task 3- Release:  0.100, Completion:  1.213, Response: 1.113, WCRT: 1.113, Next Release:  0.700 ==> Task 3 violates Deadline!
+Task 1- Release:  1.300, Completion:  1.442, Response: 0.142, WCRT: 0.152, Next Release:  1.600
+Task 1- Release:  1.600, Completion:  1.747, Response: 0.147, WCRT: 0.152, Next Release:  1.900
+Task 2- Release:  1.300, Completion:  1.759, Response: 0.459, WCRT: 0.459, Next Release:  1.700 ==> Task 2 violates Deadline!
+Task 2- Release:  1.700, Completion:  1.895, Response: 0.195, WCRT: 0.459, Next Release:  2.100
+Task 1- Release:  1.900, Completion:  2.049, Response: 0.149, WCRT: 0.152, Next Release:  2.200
+Task 3- Release:  0.700, Completion:  2.082, Response: 1.382, WCRT: 1.382, Next Release:  1.300 ==> Task 3 violates Deadline!
+Task 1- Release:  2.200, Completion:  2.339, Response: 0.139, WCRT: 0.152, Next Release:  2.500
+Task 2- Release:  2.100, Completion:  2.382, Response: 0.282, WCRT: 0.459, Next Release:  2.500
+Task 3- Release:  1.300, Completion:  2.541, Response: 1.241, WCRT: 1.382, Next Release:  1.900 ==> Task 3 violates Deadline!
+Task 1- Release:  2.500, Completion:  2.684, Response: 0.184, WCRT: 0.184, Next Release:  2.800
+Task 1- Release:  2.800, Completion:  2.938, Response: 0.138, WCRT: 0.184, Next Release:  3.100
+Task 2- Release:  2.500, Completion:  2.957, Response: 0.457, WCRT: 0.459, Next Release:  2.900 ==> Task 2 violates Deadline!
+Task 2- Release:  2.900, Completion:  3.094, Response: 0.194, WCRT: 0.459, Next Release:  3.300
+Task 1- Release:  3.100, Completion:  3.243, Response: 0.143, WCRT: 0.184, Next Release:  3.400
+Task 1- Release:  3.400, Completion:  3.609, Response: 0.209, WCRT: 0.209, Next Release:  3.700
+Task 2- Release:  3.300, Completion:  3.655, Response: 0.355, WCRT: 0.459, Next Release:  3.700
+Task 1- Release:  3.700, Completion:  3.847, Response: 0.147, WCRT: 0.209, Next Release:  4.000
+Task 2- Release:  3.700, Completion:  3.986, Response: 0.286, WCRT: 0.459, Next Release:  4.100
+Task 3- Release:  1.900, Completion:  3.990, Response: 2.090, WCRT: 2.090, Next Release:  2.500 ==> Task 3 violates Deadline!
+Task 1- Release:  4.000, Completion:  4.138, Response: 0.138, WCRT: 0.209, Next Release:  4.300
+Task 2- Release:  4.100, Completion:  4.276, Response: 0.176, WCRT: 0.459, Next Release:  4.500
+Task 1- Release:  4.300, Completion:  4.442, Response: 0.142, WCRT: 0.209, Next Release:  4.600
+^C
