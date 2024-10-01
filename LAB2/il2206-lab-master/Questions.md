@@ -58,3 +58,9 @@ The function OSQPend returns a pointer void*.
 
 (a) the void* pointer is a generic pointer type in C that can point to an object of any data type.  
 (b) cast the void* pointer to the appropriate data type, and to regenerate the original message, you need to know the actual data type of the message.
+
+## 3
+Here is diagrams for 3 RTOS Tasks
+![p1](Page1.jpg/ "p1")
+![p2](page2.jpg "p2")
+"

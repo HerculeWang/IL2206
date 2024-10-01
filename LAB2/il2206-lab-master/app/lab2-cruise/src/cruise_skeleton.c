@@ -58,6 +58,7 @@
 OS_STK StartTask_Stack[TASK_STACKSIZE]; 
 OS_STK ControlTask_Stack[TASK_STACKSIZE]; 
 OS_STK VehicleTask_Stack[TASK_STACKSIZE];
+OS_STK ButtonIO_Stack[TASK_STACKSIZE];
 
 // Task Priorities
 
@@ -190,6 +191,14 @@ void show_position(INT16U position)
 {
 }
 
+void ButtonIO(void *arg){
+    led_green = IORD_ALTERA_AVALON_PIO_DATA(LED_GREEN_0);
+    IOWR_ALTERA_AVALON_PIO_DATA(DE2_PIO_GREENLED9_BASE, 0);
+    printf("ButtonIO task created! \n");
+    while(1);
+    printf("ButtonIO\n");
+}
+
 /*
  * The task 'VehicleTask' is the model of the vehicle being simulated. It updates variables like
  * acceleration and velocity based on the input given to the model.
@@ -205,7 +214,7 @@ void VehicleTask(void* pdata)
   const unsigned int brake_factor = 4;
   const unsigned int gravity_factor = 2;
   // variables relevant to the model and its simulation on top of the RTOS
-  INT8U err;  
+  INT8U err, tmr_err;   
   void* msg;
   INT8U* throttle; 
   INT16S acceleration;  
@@ -213,6 +222,7 @@ void VehicleTask(void* pdata)
   INT16S velocity = 0; 
   enum active brake_pedal = off;
   enum active engine = off;
+  OS_TMR *vehicle_timer = OSTmrCreate(VEHICLE_PERIOD, 0, OS_TMR_OPT_ONE_SHOT, NULL, NULL, "vehicle_period_timer", &tmr_err);
 
   printf("Vehicle task created!\n");
 
@@ -220,7 +230,8 @@ void VehicleTask(void* pdata)
   {
     err = OSMboxPost(Mbox_Velocity, (void *) &velocity);
 
-    OSTimeDlyHMSM(0,0,0,VEHICLE_PERIOD); 
+    OSTmrStart(vehicle_timer, &tmr_err)
+    // OSTimeDlyHMSM(0,0,0,VEHICLE_PERIOD); 
 
     /* Non-blocking read of mailbox: 
        - message in mailbox: update throttle
@@ -289,7 +300,7 @@ void VehicleTask(void* pdata)
 
 void ControlTask(void* pdata)
 {
-  INT8U err;
+  INT8U err, tmr_err;
   INT8U throttle = 40; /* Value between 0 and 80, which is interpreted as between 0.0V and 8.0V */
   void* msg;
   INT16S* current_velocity;
@@ -297,6 +308,8 @@ void ControlTask(void* pdata)
   enum active gas_pedal = off;
   enum active top_gear = off;
   enum active cruise_control = off; 
+
+  OS_TMR *ctr_tmr = OSTmrCreate(CONTROL_PERIOD, 0, OS_TMR_OPT_ONE_SHOT, NULL, NULL, "control_timer", &tmr_err);
 
   printf("Control Task created!\n");
 
@@ -318,7 +331,8 @@ void ControlTask(void* pdata)
 
     err = OSMboxPost(Mbox_Throttle, (void *) &throttle);
 
-    OSTimeDlyHMSM(0,0,0, CONTROL_PERIOD);
+    OSTmrStart(ctr_tmr, &tmr_err);
+    // OSTimeDlyHMSM(0,0,0, CONTROL_PERIOD);
   }
 }
 
@@ -399,6 +413,18 @@ void StartTask(void* pdata)
       TASK_STACKSIZE,
       (void *) 0,
       OS_TASK_OPT_STK_CHK);
+
+  err = OSTaskCreateExt(
+      ButtonIO,
+      NULL,
+      &ButtonIO_Stack[TASK_STACKSIZE-1],
+      8,
+      8,
+      (void *)&ButtonIO_Stack[0],
+      TASK_STACKSIZE,
+      (void *) 0,
+      OS_TASK_OPT_STK_CHK
+  );
 
   printf("All Tasks and Kernel Objects generated!\n");
 
